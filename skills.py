@@ -353,15 +353,19 @@ def adv_alpha_sort_by_word_length(words):
         [(3, ['dog']), (5, ['chair']), (6, ['yellow'])]
 
     """
-    number_dict = {}
-    for word in set(words):
+    ndict = {}
+    for word in sorted(set(words)):
         length = len(word)
-        if length in number_dict:
-            number_dict[length].append(word)
+        if length in ndict:
+            ndict[length].append(word)
         else:
-            number_dict[length] = [word]
+            ndict[length] = [word]
+    # I think that this is the easier way to code this, even though it calls
+    # sorted twice:
+    # tuple_list = [(key, ndict[key]) for key in sorted(ndict.keys())]
+    num_stop = max(ndict.keys()) + 1
+    tuple_list = [(i, ndict[i]) for i in range(num_stop) if i in ndict]
 
-    tuple_list = [(key, sorted(number_dict[key])) for key in sorted(number_dict.keys())]
     return tuple_list
 
 
