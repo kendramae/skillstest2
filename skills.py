@@ -344,9 +344,17 @@ def adv_alpha_sort_by_word_length(words):
         >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
 
+    KENDRA ADDING DOC STRING:
+    I added functionality to control for repeat words and created a new test
+
+    Another example:
+
+        >>> adv_alpha_sort_by_word_length(["yellow", "dog", "chair", "yellow"])
+        [(3, ['dog']), (5, ['chair']), (6, ['yellow'])]
+
     """
     number_dict = {}
-    for word in sorted(words):
+    for word in sorted(set(words)):
         length = len(word)
         if length in number_dict:
             number_dict[length].append(word)
