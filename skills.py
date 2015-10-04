@@ -47,7 +47,7 @@ def find_common_items(list1, list2):
     Given two lists, return a list of the common items shared between
     the lists.
 
-    IMPORTANT: you may not not 'if ___ in ___' or the method 'index'.
+    IMPORTANT: you may not use 'if ___ in ___' or the method 'index'.
 
 
     For example:
@@ -134,7 +134,7 @@ def get_sum_zero_pairs(input_list):
     # we're grabbing just unique numbers >= 0 from the list and storing
     # that new list as positive_nums, which we then check agains the original
     # list to see if it's match (the negative version) is present.
-    positive_nums = list(set([i for i in sorted(input_list) if i >= 0]))
+    positive_nums = set([i for i in sorted(input_list) if i >= 0])
     for num in positive_nums:
         if -num in input_list:
             zero_sum_pairs.append([-num, num])
@@ -161,7 +161,7 @@ def remove_duplicates(words):
     """
     new_list = []
     for word in words:
-        if not word in new_list:
+        if word not in new_list:
             new_list.append(word)
 
     return new_list
@@ -354,15 +354,14 @@ def adv_alpha_sort_by_word_length(words):
 
     """
     number_dict = {}
-    for word in sorted(set(words)):
+    for word in set(words):
         length = len(word)
         if length in number_dict:
             number_dict[length].append(word)
         else:
             number_dict[length] = [word]
 
-    tuple_list = [(key, value) for key, value in number_dict.items()]
-
+    tuple_list = [(key, sorted(number_dict[key])) for key in sorted(number_dict.keys())]
     return tuple_list
 
 
